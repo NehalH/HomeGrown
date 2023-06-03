@@ -8,13 +8,11 @@ The app offers several benefits, including the promotion of sustainable and orga
 ## Features
 
 - User registration and login
-- Farmer profile creation and management
+- User profile creation and management
 - Product listing and management
 - Product search and filtering
-- Buyer browsing and ordering
-- In-app messaging between buyers and farmers
-- Order tracking and status updates
-- Secure payment integration
+- Product browsing
+- User to user contacting
 
 ## Screenshots
 
