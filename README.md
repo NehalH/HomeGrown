@@ -2,8 +2,9 @@
 
 ## Description
 
-HomeGrown is a mobile application that connects local farmers with potential buyers, providing a platform for buying and selling locally grown produce and homemade products. The app aims to promote sustainable farming practices, support local communities, and enable consumers to access fresh and high-quality agricultural products directly from the farmers.
+HomeGrown is a mobile application that promotes organic farming, serves as a source of income for farmers, and encourages people to engage in farming by utilizing small available spaces in their gardens or balconies. Our target users are individuals interested in purchasing fresh produce directly from local farmers, as well as those seeking a convenient way to sell their products.
 
+The app offers several benefits, including the promotion of sustainable and organic farming practices, which are better for the environment and consumers' health. It provides a reliable source of income for local farmers, thereby supporting the local economy. Additionally, it encourages more people to embrace farming by making it accessible and easy, even in small spaces.
 ## Features
 
 - User registration and login
