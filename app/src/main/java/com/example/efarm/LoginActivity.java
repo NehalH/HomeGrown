@@ -36,12 +36,10 @@ public class LoginActivity extends AppCompatActivity {
         loginRedirectText = findViewById(R.id.loginRedirectText);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 String email = loginEmail.getText().toString();
                 String pass = loginPassword.getText().toString();
-
                 if (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     if (!pass.isEmpty()) {
                         auth.signInWithEmailAndPassword(email, pass)
