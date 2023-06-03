@@ -17,8 +17,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:orientation="horizontal" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <!-- Product Name -->
     <EditText

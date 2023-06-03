@@ -12,4 +12,6 @@
     <color name="colorBlue">#0000FF</color>
     <color name="colorGreen">#00FF00</color>
     <color name="colorYellow">#FFFF00</color>
+    <color name="green_1">#64DD17</color>
+    <color name="green_2">#B2FF59</color>
 </resources>
