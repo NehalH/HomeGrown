@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "364852525938",
+    "project_id": "efarm-a287b",
+    "storage_bucket": "efarm-a287b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364852525938:android:42acb2c727c2b8ddd37beb",
+        "android_client_info": {
+          "package_name": "com.example.efarm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "364852525938-fq7k9v95acbfj18g7cp861jeldac86k1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSZ39meb03N_mG0QI2LmnILJd_ybApoao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "364852525938-fq7k9v95acbfj18g7cp861jeldac86k1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

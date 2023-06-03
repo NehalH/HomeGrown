@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/pbg"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity">
+
+    <!-- Image View for Multiple Images -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/imageRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:orientation="horizontal" />
+
+    <!-- Product Name -->
+    <EditText
+        android:id="@+id/productNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Product Name"
+        android:layout_margin="16dp"
+        android:layout_below="@id/imageRecyclerView"
+        android:inputType="text"
+        android:background="@drawable/edittext_bg"
+        android:textColor="@android:color/black" />
+
+    <!-- Category Spinner -->
+    <Spinner
+        android:id="@+id/categorySpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_below="@id/productNameEditText"
+        android:entries="@array/category_options"
+        android:background="@drawable/edittext_bg"
+        android:textColor="@android:color/black" />
+
+    <!-- Price -->
+    <EditText
+        android:id="@+id/priceEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Price"
+        android:layout_margin="16dp"
+        android:layout_below="@id/categorySpinner"
+        android:inputType="numberDecimal"
+        android:background="@drawable/edittext_bg"
+        android:textColor="@android:color/black" />
+
+    <!-- Quantity Available -->
+    <EditText
+        android:id="@+id/quantityEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Quantity Available"
+        android:layout_margin="16dp"
+        android:layout_below="@id/priceEditText"
+        android:inputType="number"
+        android:background="@drawable/edittext_bg"
+        android:textColor="@android:color/black" />
+
+    <!-- Seller Info -->
+    <TextView
+        android:id="@+id/sellerInfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seller Info"
+        android:layout_margin="16dp"
+        android:layout_below="@id/quantityEditText"
+        android:textStyle="bold"
+        android:textColor="@android:color/black" />
+
+    <!-- Submit Button -->
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:layout_margin="16dp"
+        android:layout_below="@id/sellerInfoTextView" />
+
+    <!-- Other views and elements can be added as per your requirements -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/lavender"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/homeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_weight="1"
+            android:text="Home"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/lavender"
+            android:drawableLeft="@drawable/baseline_home_24"
+            android:padding="10dp">
+        </TextView>
+        <TextView
+            android:id="@+id/profileTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_weight="1"
+            android:text="Profile"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/lavender"
+            android:drawableLeft="@drawable/baseline_account_circle_24"
+            android:padding="10dp">
+        </TextView>
+        <TextView
+            android:id="@+id/sellTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_weight="1"
+            android:text="Sell"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/lavender"
+            android:padding="10dp">
+        </TextView>
+
+    </LinearLayout>
+
+</RelativeLayout>
