@@ -14,9 +14,9 @@ The app offers several benefits, including the promotion of sustainable and orga
 - Product browsing
 - User to user contacting
 
+<!--
 ## Screenshots
-
-Include some screenshots or GIFs showcasing your app's user interface and key features.
+-->
 
 ## Installation
 
