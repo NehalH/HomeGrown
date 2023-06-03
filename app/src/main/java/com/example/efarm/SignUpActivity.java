@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth auth;
-    private EditText signupEmail, signupPassword;
+    private EditText signupEmail, signupPassword, confirmSignupPassword;
     private Button signupButton;
     private TextView loginRedirectText;
 
@@ -27,36 +27,47 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        auth=FirebaseAuth.getInstance();
-        signupEmail=findViewById(R.id.signup_email);
-        signupPassword=findViewById(R.id.signup_password);
-        signupButton=findViewById(R.id.signup_button);
-        loginRedirectText=findViewById(R.id.loginRedirectText);
+        auth = FirebaseAuth.getInstance();
+        signupEmail = findViewById(R.id.signup_email);
+        signupPassword = findViewById(R.id.signup_password);
+        confirmSignupPassword = findViewById(R.id.confirm_signup_password);
+        signupButton = findViewById(R.id.signup_button);
+        loginRedirectText = findViewById(R.id.loginRedirectText);
 
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String user = signupEmail.getText().toString().trim();
                 String pass = signupPassword.getText().toString().trim();
+                String confirm_pass = confirmSignupPassword.getText().toString().trim();
 
                 if (user.isEmpty()){
                     signupEmail.setError("Email cannot be empty");
                 }
-                if (pass.isEmpty()){
+                else if (pass.isEmpty()){
                     signupPassword.setError("Password cannot be empty");
                 }
+                else if (confirm_pass.isEmpty()){
+                    signupPassword.setError("Confirm your password");
+                }
                 else{
-                    auth.createUserWithEmailAndPassword(user, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(SignUpActivity.this,"SignUP Succesful", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(SignUpActivity.this,RegisterActivity.class));
-                            } else {
-                                Toast.makeText(SignUpActivity.this, "SignUp Failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    if(pass.equals(confirm_pass)){
+                        auth.createUserWithEmailAndPassword(user, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(SignUpActivity.this,"SignUP Succesful", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(SignUpActivity.this,RegisterActivity.class));
+                                } else {
+                                    Toast.makeText(SignUpActivity.this, "SignUp Failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+                    else {
+                        signupPassword.setError("Password dose not match");
+                        confirmSignupPassword.setError("Password dose not match");
+                    }
                 }
             }
         });

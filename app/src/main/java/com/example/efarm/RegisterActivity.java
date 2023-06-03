@@ -17,14 +17,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -118,10 +114,12 @@ public class RegisterActivity extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST);
     }
 
+    /*
     private void uploadImage(String documentId) {
+
         if (imageUri != null) {
             // Get a reference to the user's image in Cloud Storage
-            StorageReference imageRef = storageReference.child("users/" + documentId + "/profile_image");
+            StorageReference imageRef = storageReference.child("users/" + documentId + "/profile_image.jpg");
 
             // Upload the image file to Cloud Storage
             UploadTask uploadTask = imageRef.putFile(imageUri);
@@ -136,7 +134,7 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     // Image upload failed
-                    Toast.makeText(RegisterActivity.this, "Registration Failed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Failed to upload Image!", Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
@@ -145,6 +143,36 @@ public class RegisterActivity extends AppCompatActivity {
             openLoginActivity();
         }
     }
+    */
+
+    private void uploadImage(String documentId) {
+        if (imageUri != null) {
+            // Get a reference to the user's image in Cloud Storage
+            StorageReference imageRef = storageReference.child("users/" + documentId + "/profile_image.jpg");
+
+            // Upload the image file to Cloud Storage
+            UploadTask uploadTask = imageRef.putFile(imageUri);
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // Image upload successful
+                    Toast.makeText(RegisterActivity.this, "Image uploaded successfully!", Toast.LENGTH_SHORT).show();
+                    openLoginActivity();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    // Image upload failed
+                    Toast.makeText(RegisterActivity.this, "Failed to upload Image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            // No image selected, proceed with registration without uploading image
+            Toast.makeText(RegisterActivity.this, "No image selected. Registration Successful!", Toast.LENGTH_SHORT).show();
+            openLoginActivity();
+        }
+    }
+
 
     private void openLoginActivity() {
         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
