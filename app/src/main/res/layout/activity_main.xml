@@ -8,9 +8,9 @@
 
     <!-- Search bar -->
     <LinearLayout
+        android:id="@+id/searchbarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/searchbarLayout"
         android:layout_alignParentTop="true"
         android:padding="10dp"
         android:orientation="horizontal"
@@ -23,7 +23,7 @@
             android:layout_weight="1"
             android:hint="Search for products"
             android:inputType="text"
-            android:textSize="30px"
+            android:textSize="16sp"
             android:maxLines="1"
             android:background="@color/white"
             android:padding="10dp" />
@@ -32,11 +32,22 @@
             android:id="@+id/searchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="search"
+            android:text="Search"
             android:drawableRight="@drawable/baseline_search_24"/>
 
     </LinearLayout>
 
+    <!-- Grid View -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/searchbarLayout"
+        android:padding="8dp"
+        android:numColumns="2"
+        android:scrollbars="vertical" />
+
+    <!-- Bottom Navigation Bar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,7 +58,7 @@
 
         <TextView
             android:id="@+id/homeTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
@@ -56,12 +67,12 @@
             android:background="@color/white"
             android:drawableLeft="@drawable/baseline_home_24"
             android:textColor="@color/lavender"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:padding="10dp"/>
 
         <TextView
             android:id="@+id/profileTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
@@ -70,12 +81,12 @@
             android:background="@color/white"
             android:textStyle="bold"
             android:textColor="@color/lavender"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:padding="10dp"/>
 
         <TextView
             android:id="@+id/sellTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
@@ -83,7 +94,7 @@
             android:background="@color/white"
             android:textStyle="bold"
             android:textColor="@color/lavender"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:padding="10dp"/>
 
     </LinearLayout>

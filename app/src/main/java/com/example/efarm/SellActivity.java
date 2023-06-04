@@ -1,139 +1,91 @@
 package com.example.efarm;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class SellActivity extends AppCompatActivity {
-    private EditText productNameEditText, priceEditText, quantityEditText;
-    private Spinner categorySpinner;
-    private Button submitButton;
-    private TextView sellerInfoTextView;
 
-    private FirebaseFirestore db;
-    private CollectionReference productsCollection;
-    private StorageReference storageRef;
-
-    private static final int PICK_IMAGE_REQUEST = 1;
+    private ImageView productImageView;
+    private EditText productNameEditText, quantityEditText, priceEditText;
+    private RadioGroup categoryRadioGroup;
+    private Button listProductButton;
+    private Uri imageUri;
+    private FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell);
 
-        // Initialize views
-        productNameEditText = findViewById(R.id.productNameEditText);
-        priceEditText = findViewById(R.id.priceEditText);
-        quantityEditText = findViewById(R.id.quantityEditText);
-        categorySpinner = findViewById(R.id.categorySpinner);
-        submitButton = findViewById(R.id.submitButton);
-        sellerInfoTextView = findViewById(R.id.sellerInfoTextView);
-
         // Initialize Firebase Firestore
-        db = FirebaseFirestore.getInstance();
-        productsCollection = db.collection("products");
+        firestore = FirebaseFirestore.getInstance();
 
-        // Initialize Firebase Cloud Storage
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        storageRef = storage.getReference("product_images");
+        // Initialize views
+        productImageView = findViewById(R.id.productImageView);
+        productNameEditText = findViewById(R.id.productNameEditText);
+        quantityEditText = findViewById(R.id.quantityEditText);
+        priceEditText = findViewById(R.id.priceEditText);
+        categoryRadioGroup = findViewById(R.id.categoryRadioGroup);
+        listProductButton = findViewById(R.id.listProductButton);
 
-        submitButton.setOnClickListener(new View.OnClickListener() {
+        // Set click listener for the list product button
+        listProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get the input values
+                // Retrieve the selected category
+                int selectedCategoryId = categoryRadioGroup.getCheckedRadioButtonId();
+                RadioButton selectedCategoryRadioButton = findViewById(selectedCategoryId);
+                String category = selectedCategoryRadioButton.getText().toString();
+
+                // Retrieve other data
                 String productName = productNameEditText.getText().toString();
-                String category = categorySpinner.getSelectedItem().toString();
-                double price = Double.parseDouble(priceEditText.getText().toString());
-                int quantity = Integer.parseInt(quantityEditText.getText().toString());
+                String quantity = quantityEditText.getText().toString();
+                String price = priceEditText.getText().toString();
+                String imageUrl = imageUri != null ? productImageView.toString() : "";
 
-                // Create a new product document in Firestore
-                Map<String, Object> product = new HashMap<>();
-                product.put("productName", productName);
-                product.put("category", category);
-                product.put("price", price);
-                product.put("quantity", quantity);
-
-                productsCollection.add(product)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                String productId = documentReference.getId();
-                                // Upload the image chosen by the user
-                                uploadImage(productId);
-                                // Add success message or perform any other actions
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                // Add failure message or handle the error
-                            }
-                        });
-            }
-        });
-
-        sellerInfoTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Open seller's profile activity
-                Intent intent = new Intent(SellActivity.this, ProfileActivity.class);
-                startActivity(intent);
+                // Upload data to Firebase Firestore
+                uploadDataToFirestore(productName, category, quantity, price, imageUrl);
             }
         });
     }
 
-    private void uploadImage(String productId) {
-        // Get the image file URI chosen by the user
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        startActivityForResult(intent, PICK_IMAGE_REQUEST);
-    }
+    private void uploadDataToFirestore(String productName, String category, String quantity, String price, String imageUrl) {
+        // Create a new document in the "products" collection
+        DocumentReference documentRef = firestore.collection("products").document();
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri imageUri = data.getData();
-            String productId = ""; // Get the product ID here
-            StorageReference imageRef = storageRef.child(productId + ".jpg");
+        // Create a data object to store the product details
+        Product product = new Product(productName, category, quantity, price, imageUrl);
 
-            // Upload the image file to Firebase Cloud Storage
-            imageRef.putFile(imageUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            // Image upload success
-                            // Add success message or perform any other actions
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Image upload failed
-                            // Add failure message or handle the error
-                        }
-                    });
-        }
+        // Upload the data to Firestore
+        documentRef.set(product)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // Data upload successful
+                        // You can add any additional code or UI updates here
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Error occurred during data upload
+                        // Handle the error appropriately
+                    }
+                });
     }
 }

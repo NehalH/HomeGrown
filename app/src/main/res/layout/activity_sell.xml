@@ -1,143 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/pbg"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
 
-    <!-- Image View for Multiple Images -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/imageRecyclerView"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/productImageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/baseline_person_24"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="16dp" />
+
+
+
+    <Button
+        android:id="@+id/changeProductImageButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:backgroundTint="@color/green_1"
+        android:text="Select Product Photo"
+        android:textSize="18sp"
+        app:cornerRadius="20dp" />
 
-    <!-- Product Name -->
     <EditText
         android:id="@+id/productNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Product Name"
-        android:layout_margin="16dp"
-        android:layout_below="@id/imageRecyclerView"
-        android:inputType="text"
-        android:background="@drawable/edittext_bg"
-        android:textColor="@android:color/black" />
-
-    <!-- Category Spinner -->
-    <Spinner
-        android:id="@+id/categorySpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_below="@id/productNameEditText"
-        android:entries="@array/category_options"
-        android:background="@drawable/edittext_bg"
-        android:textColor="@android:color/black" />
-
-    <!-- Price -->
-    <EditText
-        android:id="@+id/priceEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Price"
-        android:layout_margin="16dp"
-        android:layout_below="@id/categorySpinner"
-        android:inputType="numberDecimal"
-        android:background="@drawable/edittext_bg"
-        android:textColor="@android:color/black" />
-
-    <!-- Quantity Available -->
-    <EditText
-        android:id="@+id/quantityEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Quantity Available"
-        android:layout_margin="16dp"
-        android:layout_below="@id/priceEditText"
-        android:inputType="number"
-        android:background="@drawable/edittext_bg"
-        android:textColor="@android:color/black" />
-
-    <!-- Seller Info -->
-    <TextView
-        android:id="@+id/sellerInfoTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Seller Info"
-        android:layout_margin="16dp"
-        android:layout_below="@id/quantityEditText"
-        android:textStyle="bold"
-        android:textColor="@android:color/black" />
-
-    <!-- Submit Button -->
-    <Button
-        android:id="@+id/submitButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Submit"
-        android:layout_margin="16dp"
-        android:layout_below="@id/sellerInfoTextView" />
-
-    <!-- Other views and elements can be added as per your requirements -->
+        android:padding="18dp"
+        android:layout_marginBottom="8dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/lavender"
-        android:orientation="horizontal"
-        android:padding="5dp">
+        android:padding="18dp"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/homeTextView"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:layout_weight="1"
-            android:text="Home"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textColor="@color/lavender"
-            android:drawableLeft="@drawable/baseline_home_24"
-            android:padding="10dp">
-        </TextView>
-        <TextView
-            android:id="@+id/profileTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:layout_weight="1"
-            android:text="Profile"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/lavender"
-            android:drawableLeft="@drawable/baseline_account_circle_24"
-            android:padding="10dp">
-        </TextView>
-        <TextView
-            android:id="@+id/sellTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:layout_weight="1"
-            android:text="Sell"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/lavender"
-            android:padding="10dp">
-        </TextView>
+            android:layout_height="wrap_content"
+            android:text="Category:"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/categoryRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/vegetableRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vegetable"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/fruitRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fruit" />
+
+            <RadioButton
+                android:id="@+id/nutsRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nuts" />
+
+            <RadioButton
+                android:id="@+id/spicesRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spices" />
+
+        </RadioGroup>
 
     </LinearLayout>
 
-</RelativeLayout>
+
+
+    <EditText
+        android:id="@+id/quantityEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="Available Quantity (kgs)"
+        android:padding="18dp"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/priceEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Price (per kg)"
+        android:padding="18dp"
+        android:layout_marginBottom="16dp" />
+
+
+    <Button
+        android:id="@+id/listProductButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/green_1"
+        android:text="List Product"
+        android:textSize="18sp"
+        app:cornerRadius="20dp" />
+
+</LinearLayout>

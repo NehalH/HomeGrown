@@ -114,37 +114,6 @@ public class RegisterActivity extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST);
     }
 
-    /*
-    private void uploadImage(String documentId) {
-
-        if (imageUri != null) {
-            // Get a reference to the user's image in Cloud Storage
-            StorageReference imageRef = storageReference.child("users/" + documentId + "/profile_image.jpg");
-
-            // Upload the image file to Cloud Storage
-            UploadTask uploadTask = imageRef.putFile(imageUri);
-            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    // Image upload successful
-                    Toast.makeText(RegisterActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
-                    openLoginActivity();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    // Image upload failed
-                    Toast.makeText(RegisterActivity.this, "Failed to upload Image!", Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else {
-            // No image selected, proceed with registration without uploading image
-            Toast.makeText(RegisterActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
-            openLoginActivity();
-        }
-    }
-    */
-
     private void uploadImage(String documentId) {
         if (imageUri != null) {
             // Get a reference to the user's image in Cloud Storage
