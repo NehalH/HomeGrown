@@ -11,14 +11,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.efarm.MainActivity;
+import com.example.efarm.Product;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -35,6 +39,7 @@ public class SellActivity extends AppCompatActivity {
     private EditText quantityEditText;
     private EditText priceEditText;
     private Button listProductButton;
+    private ProgressBar progressBar;
 
     private FirebaseFirestore firestore;
     private StorageReference storageReference;
@@ -62,6 +67,7 @@ public class SellActivity extends AppCompatActivity {
         quantityEditText = findViewById(R.id.quantityEditText);
         priceEditText = findViewById(R.id.priceEditText);
         listProductButton = findViewById(R.id.listProductButton);
+        progressBar = findViewById(R.id.progressBar);
 
         changeProductImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,67 +79,50 @@ public class SellActivity extends AppCompatActivity {
         listProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get user input
-                String productName = productNameEditText.getText().toString().trim();
-                String category = getCategoryFromRadioButton();
-                String quantityStr = quantityEditText.getText().toString().trim();
-                String priceStr = priceEditText.getText().toString().trim();
+                if (validateFields()) {
+                    // Get user input
+                    String productName = productNameEditText.getText().toString().trim();
+                    String category = getCategoryFromRadioButton();
+                    double quantity = Double.parseDouble(quantityEditText.getText().toString().trim());
+                    double price = Double.parseDouble(priceEditText.getText().toString().trim());
 
-                // Validate inputs
-                if (productName.isEmpty()) {
-                    Toast.makeText(SellActivity.this, "Please enter a product name", Toast.LENGTH_SHORT).show();
-                    return;
+                    // Show progress indicator
+                    showProgressBar();
+
+                    // Check if imageUri is null or not
+                    String imageUrl = imageUri != null ? imageUri.toString() : ""; // Set imageUrl to empty string if imageUri is null
+
+                    // Create a new Product object
+                    Product product = new Product(productName, category, quantity, price, imageUrl);
+
+                    // Get current user UID
+                    String userId = mCurrentUser.getUid();
+
+                    // Get a reference to the "products" collection in Firestore
+                    DocumentReference productRef = firestore.collection("users").document(userId)
+                            .collection("products").document();
+
+                    // Set the product data in Firestore
+                    productRef.set(product)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    // Upload the image to Cloud Storage
+                                    uploadImage(userId, productRef.getId());
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    // Listing failed
+                                    hideProgressBar();
+                                    Toast.makeText(SellActivity.this, "Listing Failed!", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                 }
-
-                if (category.isEmpty()) {
-                    Toast.makeText(SellActivity.this, "Please select a category", Toast.LENGTH_SHORT).show();
-                    return;
+                else {
+                    Toast.makeText(SellActivity.this, "Please enter valid data", Toast.LENGTH_SHORT).show();
                 }
-
-                if (quantityStr.isEmpty()) {
-                    Toast.makeText(SellActivity.this, "Please enter a quantity", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (priceStr.isEmpty()) {
-                    Toast.makeText(SellActivity.this, "Please enter a price", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Parse quantity and price values
-                double quantity = Double.parseDouble(quantityStr);
-                double price = Double.parseDouble(priceStr);
-
-                // Check if imageUri is null or not
-                if (imageUri == null) {
-                    Toast.makeText(SellActivity.this, "Please select an image", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Create a new Product object
-                Product product = new Product(productName, category, quantity, price, imageUri.toString());
-
-                // Get current user UID
-                String userId = mCurrentUser.getUid();
-
-                // Get a reference to the "products" collection in Firestore
-                firestore.collection("users").document(userId)
-                        .collection("products").document()
-                        .set(product)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                // Upload the image to Cloud Storage
-                                uploadImage(userId);
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                // Listing failed
-                                Toast.makeText(SellActivity.this, "Listing Failed!", Toast.LENGTH_SHORT).show();
-                            }
-                        });
             }
         });
     }
@@ -145,10 +134,10 @@ public class SellActivity extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST);
     }
 
-    private void uploadImage(String documentId) {
+    private void uploadImage(String userId, String productId) {
         if (imageUri != null) {
             // Get a reference to the product's image in Cloud Storage
-            StorageReference imageRef = storageReference.child("products/" + documentId + "/product_image.jpg");
+            StorageReference imageRef = storageReference.child("products/" + userId + "/" + productId + "/product_image.jpg");
 
             // Upload the image file to Cloud Storage
             UploadTask uploadTask = imageRef.putFile(imageUri);
@@ -156,6 +145,7 @@ public class SellActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // Image upload successful
+                    hideProgressBar();
                     Toast.makeText(SellActivity.this, "Product listed successfully!", Toast.LENGTH_SHORT).show();
                     // Reset fields after successful listing
                     resetFields();
@@ -165,11 +155,13 @@ public class SellActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     // Image upload failed
+                    hideProgressBar();
                     Toast.makeText(SellActivity.this, "Failed to upload Image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
             // No image selected, proceed with listing without uploading image
+            hideProgressBar();
             Toast.makeText(SellActivity.this, "No image selected. Listing Successful!", Toast.LENGTH_SHORT).show();
             // Reset fields after successful listing
             resetFields();
@@ -204,5 +196,50 @@ public class SellActivity extends AppCompatActivity {
         Intent intent = new Intent(SellActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private boolean validateFields() {
+        boolean isValid = true;
+
+        String productName = productNameEditText.getText().toString().trim();
+        String quantity = quantityEditText.getText().toString().trim();
+        String price = priceEditText.getText().toString().trim();
+
+        if (productName.isEmpty()) {
+            productNameEditText.setError("Product name is required");
+            isValid = false;
+        }
+
+        if (quantity.isEmpty()) {
+            quantityEditText.setError("Quantity is required");
+            isValid = false;
+        }
+
+        if (price.isEmpty()) {
+            priceEditText.setError("Price is required");
+            isValid = false;
+        }
+
+        try {
+            Double.parseDouble(quantity);
+        } catch (NumberFormatException e) {
+            isValid = false;
+        }
+
+        try {
+            Double.parseDouble(price);
+        } catch (NumberFormatException e) {
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    private void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
     }
 }

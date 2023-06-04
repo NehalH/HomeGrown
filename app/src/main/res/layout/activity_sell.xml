@@ -1,117 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/productImageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/baseline_person_24"
-        android:scaleType="centerCrop"
-        android:layout_marginBottom="16dp" />
-
-
-
-    <Button
-        android:id="@+id/changeProductImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/green_1"
-        android:text="Select Product Photo"
-        android:textSize="18sp"
-        app:cornerRadius="20dp" />
-
-    <EditText
-        android:id="@+id/productNameEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Product Name"
-        android:padding="18dp"
-        android:layout_marginBottom="8dp" />
-
+    <!-- Existing layout content -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="18dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp">
 
-        <TextView
+        <ImageView
+            android:id="@+id/productImageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/baseline_person_24"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp" />
+
+
+
+        <Button
+            android:id="@+id/changeProductImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Category:"
-            android:textStyle="bold" />
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/green_1"
+            android:text="Select Product Photo"
+            android:textSize="18sp"
+            app:cornerRadius="20dp" />
 
-        <RadioGroup
-            android:id="@+id/categoryRadioGroup"
+        <EditText
+            android:id="@+id/productNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:hint="Product Name"
+            android:padding="18dp"
+            android:layout_marginBottom="8dp" />
 
-            <RadioButton
-                android:id="@+id/vegetableRadioButton"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="18dp"
+            android:orientation="vertical">
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vegetable"
-                android:checked="true" />
+                android:text="Category:"
+                android:textStyle="bold" />
 
-            <RadioButton
-                android:id="@+id/fruitRadioButton"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/categoryRadioGroup"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fruit" />
+                android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/nutsRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nuts" />
+                <RadioButton
+                    android:id="@+id/vegetableRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vegetable"
+                    android:checked="true" />
 
-            <RadioButton
-                android:id="@+id/spicesRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Spices" />
+                <RadioButton
+                    android:id="@+id/fruitRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fruit" />
 
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/nutsRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nuts" />
+
+                <RadioButton
+                    android:id="@+id/spicesRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Spices" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+
+
+        <EditText
+            android:id="@+id/quantityEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Available Quantity (kgs)"
+            android:inputType="numberDecimal"
+            android:padding="18dp"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/priceEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Price (per kg)"
+            android:inputType="numberDecimal"
+            android:padding="18dp"
+            android:layout_marginBottom="16dp" />
+
+
+        <Button
+            android:id="@+id/listProductButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/green_1"
+            android:text="List Product"
+            android:textSize="18sp"
+            app:cornerRadius="20dp" />
 
     </LinearLayout>
 
+    <!-- Progress bar -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        android:layout_width="119dp"
+        android:layout_height="104dp"
+        android:layout_gravity="center" />
 
-
-    <EditText
-        android:id="@+id/quantityEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="Available Quantity (kgs)"
-        android:padding="18dp"
-        android:layout_marginBottom="8dp" />
-
-    <EditText
-        android:id="@+id/priceEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Price (per kg)"
-        android:padding="18dp"
-        android:layout_marginBottom="16dp" />
-
-
-    <Button
-        android:id="@+id/listProductButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/green_1"
-        android:text="List Product"
-        android:textSize="18sp"
-        app:cornerRadius="20dp" />
-
-</LinearLayout>
+</FrameLayout>
