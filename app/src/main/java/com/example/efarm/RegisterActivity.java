@@ -125,7 +125,7 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // Image upload successful
-                    Toast.makeText(RegisterActivity.this, "Image uploaded successfully!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Registration Complete!", Toast.LENGTH_SHORT).show();
                     openLoginActivity();
                 }
             }).addOnFailureListener(new OnFailureListener() {
