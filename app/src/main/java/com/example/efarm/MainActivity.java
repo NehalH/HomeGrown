@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,7 +17,7 @@ import android.widget.TextView;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,6 +133,10 @@ public class MainActivity extends AppCompatActivity {
             notifyDataSetChanged();
         }
 
+        public QueryDocumentSnapshot getItem(int position) {
+            return data.get(position);
+        }
+
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -141,23 +144,20 @@ public class MainActivity extends AppCompatActivity {
             return new ViewHolder(view);
         }
 
-        @SuppressLint("SetTextI18n")
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             QueryDocumentSnapshot document = data.get(position);
             Product product = document.toObject(Product.class);
 
-            // Customize the view holder content based on the Product object
             holder.productName.setText(product.getProductName());
             holder.productCategory.setText(product.getCategory());
             holder.productQuantity.setText(String.valueOf(product.getQuantity()));
             holder.productPrice.setText(String.valueOf(product.getPrice()));
 
-            // Load the product image using Picasso
-            Picasso.get()
+            Glide.with(holder.itemView.getContext())
                     .load(product.getImageUrl())
+                    .placeholder(R.drawable.bananas)
                     .into(holder.productImage);
-
         }
 
         @Override
