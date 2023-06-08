@@ -120,33 +120,32 @@ public class SellActivity extends AppCompatActivity {
                                     Toast.makeText(SellActivity.this, "Listing Failed!", Toast.LENGTH_SHORT).show();
                                 }
                             });
-                }
-                else {
+                } else {
                     Toast.makeText(SellActivity.this, "Please enter valid data", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
 
-                // Set click listeners for navigation
-                TextView profileTextView = findViewById(R.id.profileTextView);
-                profileTextView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(SellActivity.this, ProfileActivity.class));
-                        finish();
-                    }
-                });
+        // Set click listeners for navigation
+        TextView profileTextView = findViewById(R.id.profileTextView);
+        profileTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SellActivity.this, ProfileActivity.class));
+                finish();
+            }
+        });
 
-                TextView homeTextView = findViewById(R.id.homeTextView);
-                homeTextView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(SellActivity.this, MainActivity.class));
-                        finish();
-                    }
-                });
-
+        TextView homeTextView = findViewById(R.id.homeTextView);
+        homeTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SellActivity.this, MainActivity.class));
+                finish();
             }
         });
     }
+
 
     private void openImagePicker() {
         Intent intent = new Intent();

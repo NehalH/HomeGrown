@@ -1,6 +1,7 @@
 package com.example.efarm;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -88,7 +89,9 @@ public class ProfileActivity extends AppCompatActivity {
                                 String phone = documentSnapshot.getString("phone");
                                 String email = documentSnapshot.getString("email");
                                 String address = documentSnapshot.getString("address");
-                                String imageUrl = documentSnapshot.getString("imageUrl");
+
+                                String bucketName = "gs://homegrown-775ae.appspot.com";
+                                String imagePath = bucketName + "/users/"+ userId + "/profile_image.jpg";
 
                                 // Set user data to the corresponding views
                                 nameTextView.setText(name);
@@ -96,15 +99,24 @@ public class ProfileActivity extends AppCompatActivity {
                                 emailTextView.setText(email);
                                 addressTextView.setText(address);
 
-                                // Load profile image using Glide library
-                                RequestOptions requestOptions = new RequestOptions()
-                                        .placeholder(R.drawable.default_profile_image_background)
-                                        .error(R.drawable.default_profile_image_foreground);
-
-                                Glide.with(ProfileActivity.this)
-                                        .load(imageUrl)
-                                        .apply(requestOptions)
-                                        .into(profileImageView);
+                                // Load profile image from Firestore Storage
+                                StorageReference imageRef = mStorageRef.child(imagePath);
+                                imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        // Load the image into the ImageView
+                                        Glide.with(ProfileActivity.this)
+                                                .load(uri)
+                                                .apply(new RequestOptions().placeholder(R.drawable.baseline_account_circle_24)) // Optional: Placeholder image while loading
+                                                .into(profileImageView);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        // Handle the error
+                                        Toast.makeText(ProfileActivity.this, "Failed to load profile image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             } else {
                                 // Document does not exist
                                 Toast.makeText(ProfileActivity.this, "User data not found", Toast.LENGTH_SHORT).show();
@@ -120,4 +132,5 @@ public class ProfileActivity extends AppCompatActivity {
                     });
         }
     }
+
 }

@@ -150,8 +150,8 @@ public class MainActivity extends AppCompatActivity {
             // Customize the view holder content based on the Product object
             holder.productName.setText(product.getProductName());
             holder.productCategory.setText(product.getCategory());
-            holder.productQuantity.setText("Available : " + String.valueOf(product.getQuantity()) + " kg");
-            holder.productPrice.setText("Price : ₹ " + String.valueOf(product.getPrice()) + " /kg");
+            holder.productQuantity.setText(String.valueOf(product.getQuantity()));
+            holder.productPrice.setText(String.valueOf(product.getPrice()));
 
             // Load the product image using Picasso
             Picasso.get()
