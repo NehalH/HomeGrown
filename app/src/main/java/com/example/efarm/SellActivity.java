@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.efarm.MainActivity;
@@ -92,11 +93,11 @@ public class SellActivity extends AppCompatActivity {
                     // Check if imageUri is null or not
                     String imageUrl = imageUri != null ? imageUri.toString() : ""; // Set imageUrl to empty string if imageUri is null
 
-                    // Create a new Product object
-                    Product product = new Product(productName, category, quantity, price, imageUrl);
-
                     // Get current user UID
                     String userId = mCurrentUser.getUid();
+
+                    // Create a new Product object
+                    Product product = new Product(productName, category, quantity, price, imageUrl, userId);
 
                     // Get a reference to the "products" collection in Firestore
                     DocumentReference productRef = firestore.collection("users").document(userId)
@@ -123,6 +124,26 @@ public class SellActivity extends AppCompatActivity {
                 else {
                     Toast.makeText(SellActivity.this, "Please enter valid data", Toast.LENGTH_SHORT).show();
                 }
+
+                // Set click listeners for navigation
+                TextView profileTextView = findViewById(R.id.profileTextView);
+                profileTextView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(SellActivity.this, ProfileActivity.class));
+                        finish();
+                    }
+                });
+
+                TextView homeTextView = findViewById(R.id.homeTextView);
+                homeTextView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(SellActivity.this, MainActivity.class));
+                        finish();
+                    }
+                });
+
             }
         });
     }

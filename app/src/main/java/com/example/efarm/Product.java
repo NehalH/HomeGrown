@@ -6,17 +6,19 @@ public class Product {
     private double quantity;
     private double price;
     private String imageUrl;
+    private String userID;
 
     public Product() {
         // Empty constructor required for Firestore
     }
 
-    public Product(String productName, String category, double quantity, double price, String imageUrl) {
+    public Product(String productName, String category, double quantity, double price, String imageUrl, String userID) {
         this.productName = productName;
         this.category = category;
         this.quantity = quantity;
         this.price = price;
         this.imageUrl = imageUrl;
+        this.userID = userID;
     }
 
     // Getter and Setter for productName
@@ -42,7 +44,7 @@ public class Product {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 
@@ -62,5 +64,14 @@ public class Product {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    // Getter and Setter for userID
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 }

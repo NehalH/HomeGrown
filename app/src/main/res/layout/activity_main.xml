@@ -50,9 +50,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/lavender"
+        android:background="@color/green_1"
         android:orientation="horizontal"
-        android:padding="5dp">
+        android:padding="1dp">
 
         <TextView
             android:id="@+id/homeTextView"
@@ -64,7 +64,7 @@
             android:textStyle="bold"
             android:background="@color/white"
             android:drawableLeft="@drawable/baseline_home_24"
-            android:textColor="@color/lavender"
+            android:textColor="@color/green_1"
             android:textSize="16sp"
             android:padding="10dp"/>
 
@@ -78,7 +78,7 @@
             android:text="Profile"
             android:background="@color/white"
             android:textStyle="bold"
-            android:textColor="@color/lavender"
+            android:textColor="@color/green_1"
             android:textSize="16sp"
             android:padding="10dp"/>
 
@@ -88,13 +88,28 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+            android:drawableLeft="@drawable/baseline_account_circle_24"
             android:text="Sell"
             android:background="@color/white"
             android:textStyle="bold"
-            android:textColor="@color/lavender"
+            android:textColor="@color/green_1"
             android:textSize="16sp"
             android:padding="10dp"/>
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        android:visibility="gone"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="275dp"
+        android:layout_marginEnd="151dp"
+        android:layout_marginBottom="293dp" />
 
 </RelativeLayout>

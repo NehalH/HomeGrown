@@ -5,17 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FirestoreAdapter adapter;
     private FirebaseFirestore firestore;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
             return new ViewHolder(view);
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             QueryDocumentSnapshot document = data.get(position);
@@ -145,12 +150,14 @@ public class MainActivity extends AppCompatActivity {
             // Customize the view holder content based on the Product object
             holder.productName.setText(product.getProductName());
             holder.productCategory.setText(product.getCategory());
-            holder.productQuantity.setText(String.valueOf(product.getQuantity()));
-            holder.productPrice.setText(String.valueOf(product.getPrice()));
+            holder.productQuantity.setText("Available : " + String.valueOf(product.getQuantity()) + " kg");
+            holder.productPrice.setText("Price : ₹ " + String.valueOf(product.getPrice()) + " /kg");
 
-            // Load the product image using a library like Glide or Picasso
-            // For example, using Glide:
-            // Glide.with(holder.itemView.getContext()).load(product.getImageUrl()).into(holder.productImage);
+            // Load the product image using Picasso
+            Picasso.get()
+                    .load(product.getImageUrl())
+                    .into(holder.productImage);
+
         }
 
         @Override
