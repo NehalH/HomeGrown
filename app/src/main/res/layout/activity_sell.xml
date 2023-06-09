@@ -21,8 +21,6 @@
             android:scaleType="centerCrop"
             android:layout_marginBottom="16dp" />
 
-
-
         <Button
             android:id="@+id/changeProductImageButton"
             android:layout_width="wrap_content"
@@ -30,7 +28,7 @@
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/green_1"
             android:text="Select Product Photo"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/productNameEditText"
@@ -87,8 +85,6 @@
 
         </LinearLayout>
 
-
-
         <EditText
             android:id="@+id/quantityEditText"
             android:layout_width="match_parent"
@@ -105,21 +101,27 @@
             android:hint="Price (per kg)"
             android:inputType="numberDecimal"
             android:padding="18dp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="8dp" />
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="65dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:foregroundGravity="center"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/listProductButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/green_1"
             android:text="List Product"
             android:textSize="18sp" />
 
     </LinearLayout>
-
 
     <!-- Bottom Navigation Bar -->
     <LinearLayout
@@ -142,7 +144,7 @@
             android:drawableLeft="@drawable/baseline_home_24"
             android:textColor="@color/green_1"
             android:textSize="16sp"
-            android:padding="10dp"/>
+            android:padding="10dp" />
 
         <TextView
             android:id="@+id/profileTextView"
@@ -156,7 +158,7 @@
             android:textStyle="bold"
             android:textColor="@color/green_1"
             android:textSize="16sp"
-            android:padding="10dp"/>
+            android:padding="10dp" />
 
         <TextView
             android:id="@+id/sellTextView"
@@ -164,22 +166,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:drawableLeft="@drawable/baseline_account_circle_24"
+            android:drawableLeft="@drawable/baseline_sell_24"
             android:text="Sell"
             android:background="@color/white"
             android:textStyle="bold"
             android:textColor="@color/green_1"
             android:textSize="16sp"
-            android:padding="10dp"/>
+            android:padding="10dp" />
 
     </LinearLayout>
 
     <!-- Progress bar -->
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:visibility="gone"
-        android:layout_width="119dp"
-        android:layout_height="104dp"
-        android:layout_gravity="center" />
 
 </RelativeLayout>

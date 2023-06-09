@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.bumptech.glide.Glide;
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void retrieveDataFromFirestore() {
-        firestore.collection("users").get()
+        firestore.collection("products").get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         // List to hold the retrieved documents
@@ -83,41 +82,13 @@ public class MainActivity extends AppCompatActivity {
                             documentList.add(document);
                         }
 
-                        // Retrieve data from secondary collections for each document
-                        retrieveDataFromSecondaryCollections(documentList);
+                        // Update the data in the adapter
+                        adapter.setData(documentList);
                     } else {
                         // Failed to retrieve documents
                         // Handle the error
                     }
                 });
-    }
-
-    private void retrieveDataFromSecondaryCollections(List<QueryDocumentSnapshot> documentList) {
-        // Iterate through the documents
-        for (QueryDocumentSnapshot document : documentList) {
-            // Retrieve the reference to the secondary collection for the current document
-            CollectionReference secondaryCollectionRef = document.getReference().collection("products");
-
-            // Retrieve documents from the secondary collection
-            secondaryCollectionRef.get()
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            // List to hold the retrieved secondary documents
-                            List<QueryDocumentSnapshot> secondaryDocumentList = new ArrayList<>();
-
-                            // Iterate through the secondary documents and add them to the list
-                            for (QueryDocumentSnapshot secondaryDocument : task.getResult()) {
-                                secondaryDocumentList.add(secondaryDocument);
-                            }
-
-                            // Update the data in the adapter
-                            adapter.setData(secondaryDocumentList);
-                        } else {
-                            // Failed to retrieve secondary documents
-                            // Handle the error
-                        }
-                    });
-        }
     }
 
     private class FirestoreAdapter extends RecyclerView.Adapter<FirestoreAdapter.ViewHolder> {

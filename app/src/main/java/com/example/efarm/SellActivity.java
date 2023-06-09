@@ -100,8 +100,7 @@ public class SellActivity extends AppCompatActivity {
                     Product product = new Product(productName, category, quantity, price, imageUrl, userId);
 
                     // Get a reference to the "products" collection in Firestore
-                    DocumentReference productRef = firestore.collection("users").document(userId)
-                            .collection("products").document();
+                    DocumentReference productRef = firestore.collection("products").document();
 
                     // Set the product data in Firestore
                     productRef.set(product)

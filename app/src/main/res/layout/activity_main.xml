@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:padding="10dp"
         android:orientation="horizontal"
-        android:background="@color/white">
+        android:background="@color/green_1">
 
 
         <EditText
@@ -33,7 +33,7 @@
             android:id="@+id/searchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/green_1"
+            android:backgroundTint="#252525"
             android:text="Search"
             android:drawableRight="@drawable/baseline_search_24"/>
 
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:drawableLeft="@drawable/baseline_account_circle_24"
+            android:drawableLeft="@drawable/baseline_sell_24"
             android:text="Sell"
             android:background="@color/white"
             android:textStyle="bold"
