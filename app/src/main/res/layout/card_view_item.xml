@@ -14,7 +14,6 @@
         app:cardElevation="8dp"
         app:cardUseCompatPadding="true"
         android:background="@drawable/card_border"
-        android:backgroundTint="#FFFFFF"
         android:clickable="true"
         android:focusable="true">
 
