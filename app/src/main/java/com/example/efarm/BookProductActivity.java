@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.google.android.material.button.MaterialButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,9 +21,9 @@ public class BookProductActivity extends AppCompatActivity {
     private TextView sellerNameTextView;
     private TextView sellerPhoneTextView;
     private TextView sellerEmailTextView;
-    private Button callButton;
-    private Button emailButton;
-    private Button waButton;
+    private MaterialButton callButton;
+    private MaterialButton emailButton;
+    private MaterialButton waButton;
 
     private FirebaseFirestore firestore;
 
