@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blurry_veggies_on_wood"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ProductDetailsActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/randomID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Contact Panel For"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/sellerNameTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="30dp"
+                    android:text="Seller Name"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageButton
+                        android:id="@+id/callButton"
+                        android:layout_width="80dp"
+                        android:layout_height="70dp"
+                        android:backgroundTint="@color/black"
+                        android:src="@drawable/baseline_local_phone_24"/>
+
+
+                    <ImageButton
+                        android:id="@+id/emailButton"
+                        android:layout_width="80dp"
+                        android:layout_height="70dp"
+                        android:backgroundTint="@color/black"
+                        android:src="@drawable/baseline_email_24"/>
+
+                    <ImageButton
+                        android:id="@+id/wa"
+                        android:layout_width="80dp"
+                        android:layout_height="70dp"
+                        android:backgroundTint="@color/black"
+                        android:src="@drawable/whatsapp_" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

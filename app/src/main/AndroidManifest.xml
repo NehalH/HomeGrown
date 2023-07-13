@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_EMAIL" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="HomeGrown"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.HomeGrown"
+        tools:targetApi="31">
+        <activity
+            android:name=".MyProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BookProductActivity"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.SENDTO" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="mailto" />
+            </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".ProductListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SellActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" /> <!-- Add the ProductDetailsActivity -->
+        <activity
+            android:name=".ProductDetailsActivity"
+            android:exported="true" />
+
+        <service android:name="com.google.firebase.components.ComponentDiscoveryService">
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+        </service>
+    </application>
+
+</manifest>

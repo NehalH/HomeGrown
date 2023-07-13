@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category_options">
+        <item>Fruits</item>
+        <item>Vegetables</item>
+        <item>Grains</item>
+        <item>Herbs and Spices</item>
+    </string-array>
+</resources>
