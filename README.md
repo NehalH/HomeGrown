@@ -17,5 +17,5 @@ The app offers several benefits, including the promotion of sustainable and orga
 
 ## Usage
 
-Upon launching the HomeGrown app, users will be presented with a login screen. New users can create an account by registering with their email and password. Once logged in, farmers can create their profiles, add products with details such as name, description, price, and availability. Buyers can browse the available products, search by category or location, and place orders for the desired items. Farmers and buyers can communicate via in-app messaging to discuss details, negotiate prices, and arrange delivery. Payment for orders can be made securely through integrated payment gateways.
+Upon launching the HomeGrown app, users will be presented with a login screen. New users can create an account by registering with their email and password. Once logged in, farmers can create their profiles, add products with details such as name, description, price, and availability. Buyers can browse the available products, search by category or location, and place orders for the desired items. Farmers and buyers can communicate via in-app messaging to discuss details, negotiate prices, and arrange delivery. Payment for orders can be made securely through integrated payment gateways. 
 
