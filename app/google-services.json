@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "846029151600",
+    "project_id": "homegrown-775ae",
+    "storage_bucket": "homegrown-775ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846029151600:android:a37a4af008b492710d43b5",
+        "android_client_info": {
+          "package_name": "com.nehalh.homegrown"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "846029151600-ociqeincmusoag8s76rr24asi1nqtroo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSvSh0EWcplIMNVvrMIBh8x4bYxH_KdU8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "846029151600-ociqeincmusoag8s76rr24asi1nqtroo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

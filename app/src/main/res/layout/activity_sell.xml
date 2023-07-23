@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SellActivity">
+
+    <!-- Existing layout content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/productImageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/baseline_person_24"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/changeProductImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/green_1"
+            android:text="Select Product Photo"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/productNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Product Name"
+            android:padding="18dp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="18dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category:"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/categoryRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/vegetableRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vegetable"
+                    android:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/fruitRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fruit" />
+
+                <RadioButton
+                    android:id="@+id/nutsRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nuts" />
+
+                <RadioButton
+                    android:id="@+id/spicesRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Spices" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/quantityEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Available Quantity (kgs)"
+            android:inputType="numberDecimal"
+            android:padding="18dp"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/priceEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Price (per kg)"
+            android:inputType="numberDecimal"
+            android:padding="18dp"
+            android:layout_marginBottom="8dp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="65dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:foregroundGravity="center"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/listProductButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/green_1"
+            android:text="List Product"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <!-- Bottom Navigation Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/green_1"
+        android:orientation="horizontal"
+        android:padding="1dp">
+
+        <TextView
+            android:id="@+id/homeTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Home"
+            android:textStyle="bold"
+            android:background="@color/white"
+            android:drawableLeft="@drawable/baseline_home_24"
+            android:textColor="@color/green_1"
+            android:textSize="16sp"
+            android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/profileTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:drawableLeft="@drawable/baseline_account_circle_24"
+            android:text="Profile"
+            android:background="@color/white"
+            android:textStyle="bold"
+            android:textColor="@color/green_1"
+            android:textSize="16sp"
+            android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/sellTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:drawableLeft="@drawable/baseline_sell_24"
+            android:text="Sell"
+            android:background="@color/white"
+            android:textStyle="bold"
+            android:textColor="@color/green_1"
+            android:textSize="16sp"
+            android:padding="10dp" />
+
+    </LinearLayout>
+
+    <!-- Progress bar -->
+
+</RelativeLayout>
